@@ -130,6 +130,13 @@ namespace aerables.Controllers
         }
 
         //
+        // GET: /Account/Manage
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
+        //
         // POST: /Account/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
