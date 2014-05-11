@@ -10,7 +10,8 @@ namespace aerables
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/flot/jquery.flot.js"));
+                        "~/Scripts/flot/jquery.flot.js",
+                        "~/Scripts/flot/jquery.flot.*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

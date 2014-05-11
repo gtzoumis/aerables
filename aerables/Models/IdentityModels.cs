@@ -19,7 +19,10 @@ namespace aerables.Models
         public int Device_Id { get; set; }
         public string ThingSpeakKey { get; set; }
         public string Name { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
         public string Field1 { get; set; }
+        public string Field2 { get; set; }
         public DateTime Created_at { get; set; }
         public DateTime Updated_at { get; set; }
         public string Last_entry { get; set; }
@@ -32,8 +35,8 @@ namespace aerables.Models
         public Guid Id { get; set; }
         public int Entry_Id { get; set; }
         public DateTime Created_at { get; set; }
-        public DateTime Updated_at { get; set; }
-        public int Measurement { get; set; }
+        public int MeasurementField1 { get; set; }
+        public int MeasurementField2 { get; set; }
     }
 
 
