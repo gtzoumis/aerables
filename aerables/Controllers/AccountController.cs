@@ -73,6 +73,7 @@ namespace aerables.Controllers
                         if (maxEntry < (int)fe.entry_id)
                         {
                             Feed f = new Feed();
+                            f.Id = Guid.NewGuid();
                             f.Entry_Id = fe.entry_id;
                             f.Created_at = fe.created_at;
                             f.MeasurementField1 = fe.field1;
@@ -82,7 +83,7 @@ namespace aerables.Controllers
                         }
                     }
 
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal("/Account/Dashboard");
                 }
                 else
                 {

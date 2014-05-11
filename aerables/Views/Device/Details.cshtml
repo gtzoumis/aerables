@@ -42,56 +42,63 @@
 <div>
     <h4>Device</h4>
 	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Device_Id)
-        </dt>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Device_Id)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Device_Id)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Device_Id)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Field1)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Field1)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Field1)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Field1)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_at)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Created_at)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created_at)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Created_at)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_at)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Updated_at)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Updated_at)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Updated_at)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Last_entry)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Last_entry)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Last_entry)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Last_entry)
+                </dd>
 
-    </dl>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <iframe width="450" height="260" frameborder="0" scrolling="no" src="http://api.thingspeak.com/channels/12153/maps/channel_show?width=450&height=260&zoom=8"></iframe>
+        </div>
+    </div>
 </div>
 
 
@@ -121,7 +128,7 @@
     $(function () {
 
         var d1 = [
-            @foreach (var Metrisi in Model.Measurements)
+            @foreach (var Metrisi in Model.Measurements.OrderBy(x=>x.Created_at))
             {
                 @Html.Raw(string.Format("[{1},{0}],", Metrisi.MeasurementField1, Metrisi.Created_at.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds))
             }

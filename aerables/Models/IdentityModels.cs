@@ -14,7 +14,7 @@ namespace aerables.Models
 
     public class Device
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
         public int Device_Id { get; set; }
         public string ThingSpeakKey { get; set; }
@@ -31,7 +31,7 @@ namespace aerables.Models
 
     public class Feed
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
         public int Entry_Id { get; set; }
         public DateTime Created_at { get; set; }

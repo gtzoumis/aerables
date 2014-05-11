@@ -47,3 +47,9 @@ input[type="checkbox"].input-validation-error {
 .white {
     color: #fff;
 }
+.semitransparentBackground {
+    background-color:rgba(0,0,0,0.5);
+}
+.navbar {
+    background-color:#fff;
+}
