@@ -178,6 +178,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\DevicesController.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -205,6 +207,18 @@
     <Compile Include="Migrations\201405111404429_v0006.cs" />
     <Compile Include="Migrations\201405111404429_v0006.Designer.cs">
       <DependentUpon>201405111404429_v0006.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407131654200_v0007.cs" />
+    <Compile Include="Migrations\201407131654200_v0007.Designer.cs">
+      <DependentUpon>201407131654200_v0007.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407131729299_v0008.cs" />
+    <Compile Include="Migrations\201407131729299_v0008.Designer.cs">
+      <DependentUpon>201407131729299_v0008.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409251550111_v0009.cs" />
+    <Compile Include="Migrations\201409251550111_v0009.Designer.cs">
+      <DependentUpon>201409251550111_v0009.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -336,6 +350,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201405111404429_v0006.resx">
       <DependentUpon>201405111404429_v0006.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407131654200_v0007.resx">
+      <DependentUpon>201407131654200_v0007.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407131729299_v0008.resx">
+      <DependentUpon>201407131729299_v0008.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409251550111_v0009.resx">
+      <DependentUpon>201409251550111_v0009.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

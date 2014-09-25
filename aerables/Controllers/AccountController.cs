@@ -167,7 +167,8 @@ namespace aerables.Controllers
         // GET: /Account/Manage
         public ActionResult Dashboard()
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            return View(db.Device.ToList());
         }
 
         //

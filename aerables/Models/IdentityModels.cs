@@ -23,6 +23,8 @@ namespace aerables.Models
         public decimal Longitude { get; set; }
         public string Field1 { get; set; }
         public string Field2 { get; set; }
+        public string Field3 { get; set; }
+        public string Field4 { get; set; }
         public DateTime Created_at { get; set; }
         public DateTime Updated_at { get; set; }
         public string Last_entry { get; set; }
@@ -37,8 +39,17 @@ namespace aerables.Models
         public DateTime Created_at { get; set; }
         public int MeasurementField1 { get; set; }
         public int MeasurementField2 { get; set; }
+        public int MeasurementField3 { get; set; }
+        public int MeasurementField4 { get; set; }
     }
 
+    public class ErrorLog {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public Guid Id { get; set; }
+        public DateTime Created_at { get; set; }
+        public string Message { get; set; }
+        public string CallStack { get; set; }
+    }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -49,5 +60,6 @@ namespace aerables.Models
 
         public DbSet<Feed> Feed { get; set; }
         public DbSet<Device> Device { get; set; }
+        public DbSet<ErrorLog> ErrorLog { get; set; }
     }
 }

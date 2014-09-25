@@ -2,6 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
+@section head{
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHl5dXP8X8Rg8hTVhZ68MBlrJb-82SYGs&libraries=visualization&sensor=true_or_false">
+</script>
+<script type="text/javascript">
+    /* Data points defined as an array of LatLng objects */
+    var heatmapData = [
+        { location: new google.maps.LatLng(38.029, 23.733), weight: 44 },
+        { location: new google.maps.LatLng(37.972873, 23.693733), weight: 28 },
+        { location: new google.maps.LatLng(37.971791, 23.714333), weight: 5 },
+        { location: new google.maps.LatLng(38.013601, 23.742485), weight: 44 },
+        { location: new google.maps.LatLng(38.005088, 23.744545), weight: 28 },
+        { location: new google.maps.LatLng(38.026328, 23.823509), weight: 5 },
+        { location: new google.maps.LatLng(37.996716, 23.793983), weight: 44 },
+        { location: new google.maps.LatLng(37.990366, 23.757591), weight: 28 },
+        { location: new google.maps.LatLng(37.945262, 23.743172), weight: 5 },
+        { location: new google.maps.LatLng(37.980226, 23.739738), weight: 44 },
+        { location: new google.maps.LatLng(37.913849, 23.737679), weight: 28 },
+        { location: new google.maps.LatLng(37.931182, 23.699913), weight: 5 },
+    ];
+
+
+
+      function initialize() {
+        var mapOptions = {
+            center: new google.maps.LatLng(38.026314, 23.722229),
+          zoom: 12
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData,
+            radius: 30,
+            opacity:0.9
+        });
+
+        heatmap.setMap(map);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+}
+
 <!-- Carousel
     ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -70,7 +113,12 @@
         <h2 class="text-center">FIND A PLACE NEAR YOU</h2>
     </div>
     <div class="row">
+        <!--
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1594422.0494868504!2d23.080543213678215!3d38.69241932007668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sel!2sgr!4v1399712553179" width="100%" height="600" frameborder="0" style="border:0"></iframe>
+        -->
+
+        <div id="map-canvas" style="height:500px;" />
+
     </div>
 
     <div class="row">
