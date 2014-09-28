@@ -24,13 +24,13 @@ namespace aerables.Controllers
             db.SaveChanges();
 
 
-            var dev = db.Device.Where(x => x.ThingSpeakKey == key).FirstOrDefault();
+            var dev = db.Device.Where(x => x.APIKey == key).FirstOrDefault();
             if(dev != null)
             {
                 Feed f = new Feed();
                 f.Id = Guid.NewGuid();
                 f.Created_at = DateTime.Now;
-                f.Entry_Id = db.Device.Where(x => x.ThingSpeakKey == key).FirstOrDefault().Measurements.Max(x => x.Entry_Id) + 1;
+                f.Entry_Id = db.Device.Where(x => x.APIKey == key).FirstOrDefault().Measurements.Max(x => x.Entry_Id) + 1;
                 f.MeasurementField1 = field1;
                 f.MeasurementField2 = field2 ?? 0;
                 f.MeasurementField3 = field3 ?? 0;
@@ -60,14 +60,14 @@ namespace aerables.Controllers
             error.Created_at = DateTime.Now;
             error.CallStack = "POST";
             db.ErrorLog.Add(error);
-            db.SaveChanges(); 
-            
-            var dev = db.Device.Where(x => x.ThingSpeakKey == key).FirstOrDefault();
+            db.SaveChanges();
+
+            var dev = db.Device.Where(x => x.APIKey == key).FirstOrDefault();
             if (dev != null)
             {
                 Feed f = new Feed();
                 f.Created_at = DateTime.Now;
-                f.Entry_Id = db.Device.Where(x => x.ThingSpeakKey == key).FirstOrDefault().Measurements.Max(x => x.Entry_Id) + 1;
+                f.Entry_Id = db.Device.Where(x => x.APIKey == key).FirstOrDefault().Measurements.Max(x => x.Entry_Id) + 1;
                 f.MeasurementField1 = field1;
                 f.MeasurementField2 = field2 ?? 0;
                 dev.Measurements.Add(f);

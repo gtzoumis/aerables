@@ -14,7 +14,7 @@ namespace aerables.Controllers
         public int Get(string name, string key, string field1=null, int? id=null, decimal? lat=null, decimal? lon=null, string field2=null, string field3=null, string field4=null)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            Device dev = db.Device.Where(x => x.Name.Contains(name) || x.ThingSpeakKey.Contains(key) || (id.HasValue && x.Device_Id == id.Value)).FirstOrDefault();
+            Device dev = db.Device.Where(x => x.Name.Contains(name) || x.APIKey.Contains(key) || (id.HasValue && x.Device_Id == id.Value)).FirstOrDefault();
             if (dev == null)
             {
                 dev = new Device();
@@ -29,7 +29,7 @@ namespace aerables.Controllers
                 dev.Latitude = lat.HasValue ? lat.Value : 0.0m;
                 dev.Longitude = lon.HasValue ? lon.Value : 0.0m;
                 dev.Name = name;
-                dev.ThingSpeakKey = key;
+                dev.APIKey = key;
                 dev.Updated_at = DateTime.Now;
                 db.Device.Add(dev);
                 db.SaveChanges();

@@ -45,54 +45,39 @@
     <div class="row">
         <div class="col-md-6">
             <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Device_Id)
-                </dt>
+                <dt>@Html.DisplayNameFor(model => model.Device_Id)</dt>
+                <dd>@Html.DisplayFor(model => model.Device_Id)</dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Device_Id)
-                </dd>
+                <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+                <dd>@Html.DisplayFor(model => model.Name)</dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Name)
-                </dt>
+                <dt>@Html.DisplayNameFor(model => model.Field1)</dt>
+                <dd>@Html.DisplayFor(model => model.Field1)</dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Name)
-                </dd>
+                @if (!string.IsNullOrWhiteSpace(Model.Field2)) { 
+                <dt>@Html.DisplayNameFor(model => model.Field2)</dt>
+                <dd>@Html.DisplayFor(model => model.Field2)</dd>
+                }
+                
+                @if (!string.IsNullOrWhiteSpace(Model.Field3))
+                {
+                    <dt>@Html.DisplayNameFor(model => model.Field3)</dt>
+                    <dd>@Html.DisplayFor(model => model.Field3)</dd>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Field4))
+                {
+                    <dt>@Html.DisplayNameFor(model => model.Field4)</dt>
+                    <dd>@Html.DisplayFor(model => model.Field4)</dd>
+                }
+                
+                <dt>@Html.DisplayNameFor(model => model.Updated_at)</dt>
+                <dd>@Html.DisplayFor(model => model.Updated_at)</dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Field1)
-                </dt>
+                <dt>@Html.DisplayNameFor(model => model.Latitude)</dt>
+                <dd>@Html.DisplayFor(model => model.Latitude)</dd>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Field1)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Created_at)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Created_at)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Updated_at)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Updated_at)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Last_entry)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Last_entry)
-                </dd>
-
+                <dt>@Html.DisplayNameFor(model => model.Longitude)</dt>
+                <dd>@Html.DisplayFor(model => model.Longitude)</dd>
             </dl>
         </div>
         <div class="col-md-6">
@@ -107,11 +92,17 @@
 </div>
 
 <table class="table table-bordered">
-    <tr><th>Μέτρηση ID</th><th>Ημερομηνία Μέτρησης</th><th>Τιμή</th></tr>
+    <tr><th>Date</th><th>@Model.Field1</th><th>@Model.Field2</th><th>@Model.Field3</th><th>@Model.Field4</th></tr>
 
     @foreach (var Metrisi in Model.Measurements.OrderByDescending(x=>x.Created_at).Take(20))
     {
-        <tr><td>@Metrisi.Entry_Id</td><td>@Metrisi.Created_at.ToString("dd/MM/yyyy hh:mm:ss")</td><td>@Metrisi.MeasurementField1</td></tr>
+        <tr>
+            <td>@Metrisi.Created_at.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")</td>
+            <td>@Metrisi.MeasurementField1</td>
+            <td>@Metrisi.MeasurementField2</td>
+            <td>@Metrisi.MeasurementField3</td>
+            <td>@Metrisi.MeasurementField4</td>
+        </tr>
     }
 </table>
 
@@ -128,21 +119,103 @@
     $(function () {
 
         var d1 = [
-            @foreach (var Metrisi in Model.Measurements.Where(x=>x.Created_at > DateTime.Now.AddDays(-10)).OrderBy(x=>x.Created_at))
+            @foreach (var Metrisi in Model.Measurements.Where(x => x.Created_at > DateTime.Now.AddDays(-1)).OrderByDescending(x => x.Created_at))
             {
                 @Html.Raw(string.Format("[{1},{0}],", Metrisi.MeasurementField1, Metrisi.Created_at.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds))
             }
         ];
 
-        $.plot("#placeholder", [d1],{
+        var d2 = [
+            @foreach (var Metrisi in Model.Measurements.Where(x => x.Created_at > DateTime.Now.AddDays(-1)).OrderByDescending(x => x.Created_at))
+                {
+                    @Html.Raw(string.Format("[{1},{0}],", Metrisi.MeasurementField2, Metrisi.Created_at.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds))
+                }
+        ];
+        var d3 = [
+    @foreach (var Metrisi in Model.Measurements.Where(x => x.Created_at > DateTime.Now.AddDays(-1)).OrderByDescending(x => x.Created_at))
+        {
+            @Html.Raw(string.Format("[{1},{0}],", Metrisi.MeasurementField3, Metrisi.Created_at.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds))
+        }
+        ];
+        var d4 = [
+    @foreach (var Metrisi in Model.Measurements.Where(x => x.Created_at > DateTime.Now.AddDays(-1)).OrderByDescending(x => x.Created_at))
+        {
+            @Html.Raw(string.Format("[{1},{0}],", Metrisi.MeasurementField4, Metrisi.Created_at.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds))
+        }
+        ];
+
+        $.plot("#placeholder", [
+            {
+                label: "@Model.Field1",
+                data: d1
+            },
+            {
+                label: "@Model.Field2",
+                data: d2
+            }, 
+            {
+                label: "@Model.Field3",
+                data: d3
+            },
+            {
+                label: "@Model.Field4",
+                data: d4
+            }], {
             xaxis: {
                 mode: "time"
-            }
+            },
+            legend: {
+                show: true
+            },
+            series: {
+                lines: {
+                    show: true
+                }
+            },
+            grid: {
+                hoverable: true,
+                clickable: true
+            },
         });
 
 
+
+        $("<div id='tooltip'></div>").css({
+            position: "absolute",
+            display: "none",
+            border: "1px solid #fdd",
+            padding: "1px",
+            "background-color": "#fee",
+            opacity: 0.80
+        }).appendTo("body");
+
+        $("#placeholder").bind("plothover", function (event, pos, item) {
+
+            if (item) {
+                var x = item.datapoint[0].toFixed(0),
+					y = item.datapoint[1].toFixed(0);
+                var date = new Date(x * 1);
+                var strDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                $("#tooltip").html(item.series.label + " of " + strDate + " = " + y + " " )
+					.css({ top: item.pageY + 5, left: item.pageX + 5 })
+					.fadeIn(200);
+            } else {
+                $("#tooltip").hide();
+            }
+            
+        });
+
+        $("#placeholder").bind("plotclick", function (event, pos, item) {
+            if (item) {
+                plot.highlight(item.series, item.datapoint);
+            }
+        });
+
     });
 
+    setTimeout(function () {
+        window.location.reload(1);
+    }, 100000);
 </script>
 
 }

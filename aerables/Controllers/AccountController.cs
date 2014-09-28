@@ -52,37 +52,6 @@ namespace aerables.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-
-                    var request = WebRequest.Create("http://api.thingspeak.com/channels/12153/feed.json");
-                    request.ContentType = "application/json; charset=utf-8";
-                    string text;
-                    var response = (HttpWebResponse)request.GetResponse();
-
-                    using (var sr = new StreamReader(response.GetResponseStream()))
-                    {
-                        text = sr.ReadToEnd();
-                    }
-
-                    dynamic d = JsonConvert.DeserializeObject(text);
-                    ApplicationDbContext db = new ApplicationDbContext();
-                    Device dev = db.Device.First();
-                    int maxEntry = dev.Measurements.Max(x => x.Entry_Id);
-
-                    foreach(dynamic fe in d.feeds)
-                    {
-                        if (maxEntry < (int)fe.entry_id)
-                        {
-                            Feed f = new Feed();
-                            f.Id = Guid.NewGuid();
-                            f.Entry_Id = fe.entry_id;
-                            f.Created_at = fe.created_at;
-                            f.MeasurementField1 = fe.field1;
-                            f.MeasurementField2 = (fe.field2 == null) ? 0 : fe.field2;
-                            dev.Measurements.Add(f);
-                            db.SaveChanges();
-                        }
-                    }
-
                     return RedirectToLocal("/Account/Dashboard");
                 }
                 else

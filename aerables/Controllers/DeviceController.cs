@@ -46,7 +46,7 @@ namespace aerables.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Device_Id,Name,Field1,Created_at,Updated_at,Last_entry")] Device device)
+        public ActionResult Create([Bind(Include = "Id,Device_Id,Name,Field1,Field2,Field3,Field4,Created_at,Updated_at,Latitude,Longitude,APIKey")] Device device)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace aerables.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Device_Id,Name,Field1,Created_at,Updated_at,Last_entry")] Device device)
+        public ActionResult Edit([Bind(Include = "Id,Device_Id,Name,Field1,Field2,Field3,Field4,Created_at,Updated_at,Latitude,Longitude,APIKey")] Device device)
         {
             if (ModelState.IsValid)
             {

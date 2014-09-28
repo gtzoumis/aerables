@@ -17,7 +17,7 @@ namespace aerables.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
         public int Device_Id { get; set; }
-        public string ThingSpeakKey { get; set; }
+        public string APIKey { get; set; }
         public string Name { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
@@ -54,7 +54,7 @@ namespace aerables.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("DefaultConnection", false)
         {
         }
 
